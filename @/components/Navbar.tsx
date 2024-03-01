@@ -2,7 +2,8 @@
 
 import * as React from "react"
 import Link from "next/link"
-
+import { Label } from "../components/ui/label"
+import { Switch } from "../components/ui/switch"
 import { cn } from "../lib/utils"
 // import { Icons } from "../components/icons"
 import {
@@ -14,6 +15,8 @@ import {
     NavigationMenuTrigger,
     navigationMenuTriggerStyle,
 } from "../components/ui/navigation-menu"
+
+import { ModeToggle } from "./ModeToggle"
 
 const components: { title: string; href: string; description: string }[] = [
     {
@@ -62,6 +65,14 @@ export default function Navbar() {
 
             <NavigationMenu>
                 <NavigationMenuList>
+                    <NavigationMenuItem>
+                        <div className="flex items-center space-x-2">
+                            {/* <Switch id="airplane-mode" />
+                            <Label htmlFor="airplane-mode">Dark Mode</Label> */}
+
+                            <ModeToggle />
+                        </div>
+                    </NavigationMenuItem>
                     <NavigationMenuItem>
                         <NavigationMenuTrigger>Components</NavigationMenuTrigger>
                         <NavigationMenuContent>

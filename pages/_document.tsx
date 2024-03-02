@@ -8,7 +8,7 @@ export default function Document() {
       <body>
         <ThemeProvider
           attribute="class"
-          defaultTheme=""
+          defaultTheme="dark"
           enableSystem
           disableTransitionOnChange
         >

@@ -19,7 +19,7 @@ function Hero() {
       </div>
 
       <div className='w-full flex items-center justify-center mt-5'>
-        <Link href="/" className='submit-button hover:border-white text-center dark:text-white dark:hover:border-black border border-[#e536ab] text-black transition-all duration-300 rounded-full hover:text-white text-xs font-light w-full md:w-auto py-3 px-7 mt-5 uppercase ring-0 outline-none'>
+        <Link href="/chat" className='submit-button hover:border-white text-center dark:text-white dark:hover:border-black border border-[#e536ab] text-black transition-all duration-300 rounded-full hover:text-white text-xs font-light w-full md:w-auto py-3 px-7 mt-5 uppercase ring-0 outline-none'>
           Get Started
         </Link>
       </div>

@@ -8,13 +8,13 @@ export default function Document() {
       <body>
         <ThemeProvider
           attribute="class"
-          defaultTheme="dark"
+          defaultTheme=""
           enableSystem
           disableTransitionOnChange
         >
-          <Main />  
-          <NextScript />
+          <Main />
         </ThemeProvider>
+        <NextScript />
       </body>
     </Html>
   );

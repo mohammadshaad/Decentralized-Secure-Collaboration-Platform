@@ -3,16 +3,16 @@ import { ThemeProvider } from "../@/components/theme-provider";
 
 export default function Document() {
   return (
-    <Html lang="en">
+    <Html lang="en" suppressHydrationWarning>
       <Head />
       <body>
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
+          defaultTheme=""
           enableSystem
           disableTransitionOnChange
         >
-          <Main />
+          <Main />  
           <NextScript />
         </ThemeProvider>
       </body>

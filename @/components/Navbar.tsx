@@ -59,7 +59,7 @@ const components: { title: string; href: string; description: string }[] = [
 export default function Navbar() {
     return (
         <div className="w-full flex items-center justify-between mt-5 px-10">
-            <a href="/" className="text-2xl font-bold ">
+            <a href="/" className="text-2xl font-black ">
                 DSCP
             </a>
 

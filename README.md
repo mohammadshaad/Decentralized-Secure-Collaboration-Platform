@@ -9,7 +9,7 @@ The **Decentralized Secure Collaboration Platform (DSCP)** is an innovative solu
 > 
 
 
-![DSCP ARCHITECTURE DIAGRAM.drawio.png](https://file.notion.so/f/f/da088bfc-1d5e-443f-8da4-e25b35549c1b/a5c074c1-3a6c-4a44-a1f5-bc7af848cbd1/DSCP_ARCHITECTURE_DIAGRAM.drawio.png?id=a926ba5f-a78a-4d88-8f21-f676b97dc789&table=block&spaceId=da088bfc-1d5e-443f-8da4-e25b35549c1b&expirationTimestamp=1709215200000&signature=6AA7geC2raQkMrsfTRSwRYKDMqd0ChtWPl7R0HNYC4M&downloadName=DSCP+ARCHITECTURE+DIAGRAM.drawio.png)
+![DSCP ARCHITECTURE DIAGRAM.drawio.png](https://github.com/mohammadshaad/Decentralized-Secure-Collaboration-Platform/blob/main/public/DSCP%20ARCHITECTURE%20DIAGRAM.png?raw=true)
 
 ## **1. Introduction**
 

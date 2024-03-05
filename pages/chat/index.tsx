@@ -84,13 +84,15 @@ export default function Home() {
     return (
         <main className="w-full min-h-screen m-auto flex flex-col justify-center items-center">
             {/* <input type="file" id="file" ref={inputFile} onChange={handleChange} /> */}
-            <div className="grid w-full max-w-sm items-center gap-1.5">
-                <Label htmlFor="file">Picture</Label>
-                <Input type="file" id="file" ref={inputFile} onChange={handleChange} />
+            <div className="flex items-center justify-center gap-2 w-full ">
+                <div className="grid w-full max-w-sm items-center gap-1.5">
+                    <Input type="file" id="file" ref={inputFile} onChange={handleChange} />
+                </div>
+                <button disabled={uploading} onClick={() => inputFile.current.click()} className="flex items-center justify-center">
+                    {uploading ? "Uploading..." : "Upload"}
+                </button>
             </div>
-            <button disabled={uploading} onClick={() => inputFile.current.click()}>
-                {uploading ? "Uploading..." : "Upload"}
-            </button>
+
             {data.map((fileItem) => (
                 <div key={fileItem.id}>
                     <img

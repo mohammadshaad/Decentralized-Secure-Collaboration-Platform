@@ -3,12 +3,16 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import { Input } from "../../@/components/ui/input";
+import { Label } from "../../@/components/ui/label"
+import { Button } from "../../@/components/ui/button"
 
 export default function Home() {
     const [file, setFile] = useState("");
     const [cid, setCid] = useState("");
     const [uploading, setUploading] = useState(false);
     const [data, setData] = useState([]);
+    const [deleting, setDeleting] = useState(false);
 
     const inputFile = useRef(null);
 
@@ -52,6 +56,26 @@ export default function Home() {
         }
     };
 
+    const handleDelete = async (fileItem) => {
+        try {
+            setDeleting(true);
+
+            const res = await fetch(`/api/deleteFile/${fileItem.ipfs_pin_hash}`, {
+                method: "DELETE",
+            });
+
+            const resData = await res.json();
+            console.log(resData);
+
+            setDeleting(false);
+        } catch (e) {
+            console.error(e);
+            setDeleting(false);
+            alert("Trouble deleting file");
+        }
+    };
+
+
     const handleChange = (e) => {
         setFile(e.target.files[0]);
         uploadFile(e.target.files[0]);
@@ -59,7 +83,11 @@ export default function Home() {
 
     return (
         <main className="w-full min-h-screen m-auto flex flex-col justify-center items-center">
-            <input type="file" id="file" ref={inputFile} onChange={handleChange} />
+            {/* <input type="file" id="file" ref={inputFile} onChange={handleChange} /> */}
+            <div className="grid w-full max-w-sm items-center gap-1.5">
+                <Label htmlFor="file">Picture</Label>
+                <Input type="file" id="file" ref={inputFile} onChange={handleChange} />
+            </div>
             <button disabled={uploading} onClick={() => inputFile.current.click()}>
                 {uploading ? "Uploading..." : "Upload"}
             </button>
@@ -69,8 +97,12 @@ export default function Home() {
                         src={`https://black-tremendous-roundworm-416.mypinata.cloud/ipfs/${fileItem.ipfs_pin_hash}`}
                         alt="Image from IPFS"
                     />
+                    <Button variant="destructive" disabled={deleting} onClick={() => handleDelete(fileItem)}>
+                        Delete
+                    </Button>
                 </div>
             ))}
+
         </main>
     );
 }

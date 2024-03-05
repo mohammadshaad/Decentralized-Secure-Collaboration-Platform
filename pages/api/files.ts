@@ -1,0 +1,61 @@
+import { NextResponse, NextRequest } from "next/server";
+export const runtime = 'edge' 
+
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+};
+
+export default async function handler(request: NextRequest) {
+  if (request.method === "GET") {
+    return handleGET(request);
+  } else if (request.method === "POST") {
+    return handlePOST(request);
+  } else {
+    return NextResponse.json({ error: "Method Not Allowed" }, { status: 405 });
+  }
+}
+
+async function handleGET(request: NextRequest) {
+  try {
+    const res = await fetch("https://api.pinata.cloud/data/pinList?status=pinned", {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${process.env.PINATA_JWT}`,
+      },
+    });
+
+    const data = await res.json();
+    const results = data.results || [];
+
+    return new Response(JSON.stringify({ results }), { status: 200, headers: { 'Content-Type': 'application/json' } });
+  } catch (e) {
+    console.error(e);
+    return new Response(JSON.stringify({ error: "Internal Server Error" }), { status: 500, headers: { 'Content-Type': 'application/json' } });
+  }
+}
+
+async function handlePOST(request: NextRequest) {
+  try {
+    const data = await request.formData();
+    const file: File | null = data.get("file") as File;
+
+    data.append("pinataMetadata", JSON.stringify({ name: "File to upload" }));
+    const res = await fetch("https://api.pinata.cloud/pinning/pinFileToIPFS", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${process.env.PINATA_JWT}`,
+      },
+      body: data,
+    });
+
+    const { IpfsHash } = await res.json();
+    console.log(IpfsHash);
+
+    return new Response(JSON.stringify({ IpfsHash }), { status: 200, headers: { 'Content-Type': 'application/json' } });
+  } catch (e) {
+    console.error(e);
+    return new Response(JSON.stringify({ error: "Internal Server Error" }), { status: 500, headers: { 'Content-Type': 'application/json' } });
+  }
+}

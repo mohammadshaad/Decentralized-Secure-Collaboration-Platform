@@ -2,12 +2,13 @@
 
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 
 export default function Home() {
     const [file, setFile] = useState("");
     const [cid, setCid] = useState("");
     const [uploading, setUploading] = useState(false);
+    const [data, setData] = useState([]);
 
     const inputFile = useRef(null);
 
@@ -20,11 +21,17 @@ export default function Home() {
                 throw new Error("Error fetching files");
             }
             const data = await res.json();
+            setData(data.results);
 
         } catch (e) {
             console.log(e);
         }
     }
+
+    useEffect(() => {
+        // Fetch files when the component mounts
+        fetchFiles();
+    }, []);
 
     const uploadFile = async (fileToUpload) => {
         try {
@@ -56,11 +63,21 @@ export default function Home() {
             <button disabled={uploading} onClick={() => inputFile.current.click()}>
                 {uploading ? "Uploading..." : "Upload"}
             </button>
+            {data.map((fileData) => (
+                <div key={fileData.cid}>
+                    <img
+                        src={`${process.env.NEXT_PUBLIC_GATEWAY_URL}/ipfs/${fileData.cid}`}
+                        alt="Image from IPFS"
+                    />
+                </div>
+            ))}
             {cid && (
-                <img
-                    src={`${process.env.NEXT_PUBLIC_GATEWAY_URL}/ipfs/${cid}`}
-                    alt="Image from IPFS"
-                />
+                <div>
+                    <img
+                        src={`${process.env.NEXT_PUBLIC_GATEWAY_URL}/ipfs/${cid}`}
+                        alt="Uploaded Image from IPFS"
+                    />
+                </div>
             )}
         </main>
     );

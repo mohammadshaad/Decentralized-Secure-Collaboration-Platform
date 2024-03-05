@@ -20,11 +20,11 @@ export default function Home() {
             if (!res.ok) {
                 throw new Error("Error fetching files");
             }
-            const data = await res.json();
-            setData(data.results);
+            const responseData = await res.json();
+            setData(responseData.rows || []);
 
         } catch (e) {
-            console.log(e);
+            console.error(e);
         }
     }
 
@@ -36,17 +36,17 @@ export default function Home() {
     const uploadFile = async (fileToUpload) => {
         try {
             setUploading(true);
-            const data = new FormData();
-            data.set("file", fileToUpload);
+            const formData = new FormData();
+            formData.set("file", fileToUpload);
             const res = await fetch("/api/files", {
                 method: "POST",
-                body: data,
+                body: formData,
             });
             const resData = await res.json();
             setCid(resData.IpfsHash);
             setUploading(false);
         } catch (e) {
-            console.log(e);
+            console.error(e);
             setUploading(false);
             alert("Trouble uploading file");
         }
@@ -63,22 +63,14 @@ export default function Home() {
             <button disabled={uploading} onClick={() => inputFile.current.click()}>
                 {uploading ? "Uploading..." : "Upload"}
             </button>
-            {data.map((fileData) => (
-                <div key={fileData.cid}>
+            {data.map((fileItem) => (
+                <div key={fileItem.id}>
                     <img
-                        src={`${process.env.NEXT_PUBLIC_GATEWAY_URL}/ipfs/${fileData.cid}`}
+                        src={`https://black-tremendous-roundworm-416.mypinata.cloud/ipfs/${fileItem.ipfs_pin_hash}`}
                         alt="Image from IPFS"
                     />
                 </div>
             ))}
-            {cid && (
-                <div>
-                    <img
-                        src={`${process.env.NEXT_PUBLIC_GATEWAY_URL}/ipfs/${cid}`}
-                        alt="Uploaded Image from IPFS"
-                    />
-                </div>
-            )}
         </main>
     );
 }

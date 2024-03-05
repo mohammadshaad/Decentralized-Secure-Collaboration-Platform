@@ -1,5 +1,5 @@
 import { NextResponse, NextRequest } from "next/server";
-export const runtime = 'edge' 
+export const runtime = 'edge'
 
 export const config = {
   api: {
@@ -19,7 +19,7 @@ export default async function handler(request: NextRequest) {
 
 async function handleGET(request: NextRequest) {
   try {
-    const res = await fetch("https://api.pinata.cloud/data/pinList?status=pinned", {
+    const res = await fetch("https://api.pinata.cloud/data/pinList", {
       method: "GET",
       headers: {
         Authorization: `Bearer ${process.env.PINATA_JWT}`,
@@ -27,14 +27,20 @@ async function handleGET(request: NextRequest) {
     });
 
     const data = await res.json();
-    const results = data.results || [];
 
-    return new Response(JSON.stringify({ results }), { status: 200, headers: { 'Content-Type': 'application/json' } });
+    return new Response(JSON.stringify(data), {
+      status: 200,
+      headers: { 'Content-Type': 'application/json' },
+    });
   } catch (e) {
     console.error(e);
-    return new Response(JSON.stringify({ error: "Internal Server Error" }), { status: 500, headers: { 'Content-Type': 'application/json' } });
+    return new Response(JSON.stringify({ error: "Internal Server Error" }), {
+      status: 500,
+      headers: { 'Content-Type': 'application/json' },
+    });
   }
 }
+
 
 async function handlePOST(request: NextRequest) {
   try {

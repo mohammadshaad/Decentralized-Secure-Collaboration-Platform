@@ -75,7 +75,7 @@ export default function Home() {
   };
 
   const handleCopyIpfsHash = (ipfsHash) => {
-    navigator.clipboard.writeText(ipfsHash);
+    navigator.clipboard.writeText("https://black-tremendous-roundworm-416.mypinata.cloud/ipfs/" + ipfsHash);
     alert("IPFS hash copied to clipboard!");
   };
 

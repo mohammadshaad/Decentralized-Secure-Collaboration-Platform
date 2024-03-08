@@ -2,6 +2,7 @@ import Image from "next/image";
 
 import { Inter } from "next/font/google";
 import Hero from "../@/components/Hero";
+import WhyUs from "../@/components/WhyUs";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -11,6 +12,7 @@ export default function Home() {
       className={`flex min-h-screen flex-col items-center justify-between md:p-24 ${inter.className}`}
     >
       <Hero />
+      <WhyUs />
     </main>
   );
 }

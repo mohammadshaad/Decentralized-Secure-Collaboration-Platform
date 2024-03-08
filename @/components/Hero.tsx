@@ -5,6 +5,9 @@ import Link from 'next/link'
 import React from 'react'
 import { Input } from "../../@/components/ui/input";
 import { useRouter } from 'next/router';
+import { Button } from "./ui/moving-border";
+
+import { Spotlight } from "./ui/Spotlight";
 
 function Hero() {
   const [pinataApiKey, setPinataApiKey] = useState("");
@@ -19,7 +22,13 @@ function Hero() {
   };
 
   return (
+
+    
     <div className='container flex flex-col items-start justify-center w-full  max-h-screen h-[500px]'>
+      <Spotlight
+        className="-top-40 left-0 md:left-60 md:-top-20"
+        fill="pink"
+      />
       <div className='text-4xl md:text-7xl text-left md:text-center font-extrabold md:max-w-6xl leading-tight uppercase'>
         <span className='hero-text'>
           Descentralised

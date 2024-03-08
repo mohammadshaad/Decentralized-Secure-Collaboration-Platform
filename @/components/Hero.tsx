@@ -10,14 +10,14 @@ import { Button } from "./ui/moving-border";
 import { Spotlight } from "./ui/Spotlight";
 
 function Hero() {
-  const [pinataApiKey, setPinataApiKey] = useState("");
+  const [pinataJWT, setPinataJWT] = useState("");
 
   const router = useRouter();
 
   const handleGetStarted = () => {
     router.push({
       pathname: '/files',
-      query: { pinataApiKey },
+      query: { pinataJWT },
     });
   };
 
@@ -47,11 +47,11 @@ function Hero() {
         <div className="w-1/2">
           <Input
             type="text"
-            id="pinataApiKey"
+            id="pinataJWT"
             className="rounded-full py-5"
-            value={pinataApiKey}
-            onChange={(e) => setPinataApiKey(e.target.value)}
-            placeholder="Enter Pinata API Key"
+            value={pinataJWT}
+            onChange={(e) => setPinataJWT(e.target.value)}
+            placeholder="Enter Pinata JWT"
           />
         </div>
         {/* Update the onClick handler to call handleGetStarted instead of directly navigating */}

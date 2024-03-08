@@ -16,7 +16,7 @@ export default function Home() {
   const [uploading, setUploading] = useState(false);
   const [data, setData] = useState([]);
   const [deleting, setDeleting] = useState(false);
-  const [pinataApiKey, setPinataApiKey] = useState(""); // State to store Pinata API key
+  const [pinataJWT, setPinataJWT] = useState(""); 
 
   const inputFile = useRef(null);
 
@@ -39,9 +39,9 @@ export default function Home() {
   };
 
   useEffect(() => {
-    const { pinataApiKey } = router.query;
-    if (pinataApiKey) {
-      setPinataApiKey(pinataApiKey);
+    const { pinataJWT } = router.query;
+    if (pinataJWT) {
+      setPinataJWT(pinataJWT);
     }
 
     fetchFiles();
@@ -52,11 +52,11 @@ export default function Home() {
       setUploading(true);
       const formData = new FormData();
       formData.set("file", fileToUpload);
-      formData.set("pinataApiKey", pinataApiKey);
+      formData.set("pinataJWT", pinataJWT);
       const res = await fetch("https://api.pinata.cloud/pinning/pinFileToIPFS", {
         method: "POST",
         headers: {
-          Authorization: `Bearer ${pinataApiKey}`,
+          Authorization: `Bearer ${pinataJWT}`,
         },
         body: formData,
       });

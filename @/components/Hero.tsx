@@ -43,12 +43,12 @@ function Hero() {
         </p>
       </div>
 
-      <div className='w-full flex items-center justify-center mt-10 gap-6'>
-        <div className="w-1/2">
+      <div className='w-full flex items-center justify-center mt-10 gap-2 md:gap-6'>
+        <div className="w-full md:w-1/2">
           <Input
             type="text"
             id="pinataJWT"
-            className="rounded-full py-5"
+            className="rounded-full py-5 "
             value={pinataJWT}
             onChange={(e) => setPinataJWT(e.target.value)}
             placeholder="Enter Pinata JWT"
@@ -57,7 +57,7 @@ function Hero() {
         {/* Update the onClick handler to call handleGetStarted instead of directly navigating */}
         <button
           onClick={handleGetStarted}
-          className='submit-button hover:border-white text-center dark:text-white dark:hover:border-black border border-[#e536ab] text-black transition-all duration-300 rounded-full hover:text-white text-xs font-light w-full md:w-auto py-3 px-7 uppercase ring-0 outline-none'
+          className='submit-button w-1/2 text-xs hover:border-white text-center dark:text-white dark:hover:border-black border border-[#e536ab] text-black transition-all duration-300 rounded-full hover:text-white font-light md:w-auto py-3 px-7 uppercase ring-0 outline-none'
         >
           Get Started
         </button>

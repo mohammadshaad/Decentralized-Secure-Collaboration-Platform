@@ -15,15 +15,20 @@ function Hero() {
   const router = useRouter();
 
   const handleGetStarted = () => {
-    router.push({
-      pathname: '/files',
-      query: { pinataJWT },
-    });
+    if (!pinataJWT) {
+      alert("Please enter the Pinata JWT to get started");
+    }
+    else {
+      router.push({
+        pathname: '/files',
+        query: { pinataJWT },
+      });
+    };
   };
 
   return (
 
-    
+
     <div className='container flex flex-col items-start justify-center w-full  max-h-screen h-[500px]'>
       <Spotlight
         className="-top-40 left-0 md:left-60 md:-top-20"
@@ -52,6 +57,7 @@ function Hero() {
             value={pinataJWT}
             onChange={(e) => setPinataJWT(e.target.value)}
             placeholder="Enter Pinata JWT"
+            required
           />
         </div>
         {/* Update the onClick handler to call handleGetStarted instead of directly navigating */}

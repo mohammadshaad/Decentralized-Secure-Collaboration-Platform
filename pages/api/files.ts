@@ -9,10 +9,10 @@ export const config = {
 
 export default async function handler(request: NextRequest) {
   if (request.method === "GET") {
-    return handleGET(request);
+    return handleGET(request);  
   } else if (request.method === "POST") {
     return handlePOST(request);
-  } 
+  }
   else if (request.method === "DELETE") {
     return handleDELETE(request);
   } else {
@@ -72,7 +72,7 @@ async function handleDELETE(request: NextRequest) {
   try {
     // Extract CID from the request URL
     const [, , , , cid] = request.nextUrl.pathname.split('/');
-    
+
     const res = await fetch(`https://api.pinata.cloud/pinning/unpin/${cid}`, {
       method: "DELETE",
       headers: {

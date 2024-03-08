@@ -6,6 +6,9 @@ import { useState, useRef, useEffect } from "react";
 import { Input } from "../../@/components/ui/input";
 import { Label } from "../../@/components/ui/label";
 import { Button } from "../../@/components/ui/button";
+import { ToastAction } from "../../@/components/ui/toast"
+import { useToast } from "../../@/components/ui/use-toast"
+import { useRouter } from 'next/router';
 
 export default function Home() {
   const [file, setFile] = useState("");
@@ -13,8 +16,12 @@ export default function Home() {
   const [uploading, setUploading] = useState(false);
   const [data, setData] = useState([]);
   const [deleting, setDeleting] = useState(false);
+  const [pinataApiKey, setPinataApiKey] = useState(""); // State to store Pinata API key
 
   const inputFile = useRef(null);
+
+  const router = useRouter();
+
 
   const fetchFiles = async () => {
     try {
@@ -32,7 +39,11 @@ export default function Home() {
   };
 
   useEffect(() => {
-    // Fetch files when the component mounts
+    const { pinataApiKey } = router.query;
+    if (pinataApiKey) {
+      setPinataApiKey(pinataApiKey);
+    }
+
     fetchFiles();
   }, []);
 
@@ -41,13 +52,18 @@ export default function Home() {
       setUploading(true);
       const formData = new FormData();
       formData.set("file", fileToUpload);
-      const res = await fetch("/api/files", {
+      formData.set("pinataApiKey", pinataApiKey);
+      const res = await fetch("https://api.pinata.cloud/pinning/pinFileToIPFS", {
         method: "POST",
+        headers: {
+          Authorization: `Bearer ${pinataApiKey}`,
+        },
         body: formData,
       });
       const resData = await res.json();
       setCid(resData.IpfsHash);
       setUploading(false);
+      alert("File uploaded successfully!!!");
     } catch (e) {
       console.error(e);
       setUploading(false);
@@ -84,14 +100,26 @@ export default function Home() {
     uploadFile(e.target.files[0]);
   };
 
+  const { toast } = useToast()
+
   return (
     <main className="w-full min-h-screen m-auto flex flex-col justify-start items-center space-y-4">
       <div className="flex items-center justify-center gap-2 w-full mb-20 mt-20">
         <div className="w-full gap-2 max-w-md flex flex-col p-4 md:flex-row items-center justify-center">
-          <Input type="file" id="file" ref={inputFile} onChange={handleChange} />
+
+          <Input type="file" id="file" ref={inputFile} onChange={handleChange} className="rounded-full" />
           <Button
             disabled={uploading}
-            onClick={() => inputFile.current.click()}
+            onClick={() => {
+              inputFile.current.click();
+              toast({
+                title: "File Uploaded Succesfully!",
+                description: `${file.name}` + " has been uploaded to IPFS",
+                action: (
+                  <ToastAction altText="Copy URL">Copy</ToastAction>
+                ),
+              });
+            }}
             className="flex items-center justify-center submit-button bg-transparent hover:border-white text-center dark:text-white dark:hover:border-black border border-[#e536ab] text-black transition-all duration-300 rounded-full hover:text-white text-xs font-light w-full md:w-auto py-3 px-7 uppercase ring-0 outline-none"
           >
             {uploading ? "Uploading..." : "Upload"}

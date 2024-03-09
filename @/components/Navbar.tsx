@@ -61,20 +61,13 @@ export default function Navbar() {
         <div className="w-full flex items-center justify-between mt-5 px-10">
             <a href="/" className="text-2xl font-black ">
                 DSCP
-            </a>
+            </a> 
 
             <NavigationMenu>
                 <NavigationMenuList>
-                    <NavigationMenuItem>
-                        <div className="flex items-center space-x-2">
-                            {/* <Switch id="airplane-mode" />
-                            <Label htmlFor="airplane-mode">Dark Mode</Label> */}
 
-                            <ModeToggle />
-                        </div>
-                    </NavigationMenuItem>
-                    {/* <NavigationMenuItem>
-                        <NavigationMenuTrigger>Components</NavigationMenuTrigger>
+                    <NavigationMenuItem>
+                        <NavigationMenuTrigger>Our Services</NavigationMenuTrigger>
                         <NavigationMenuContent>
                             <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
                                 {components.map((component) => (
@@ -89,13 +82,22 @@ export default function Navbar() {
                             </ul>
                         </NavigationMenuContent>
                     </NavigationMenuItem>
-                    <NavigationMenuItem>
+                    {/* <NavigationMenuItem>
                         <Link href="/docs" legacyBehavior passHref>
                             <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                                 Documentation
                             </NavigationMenuLink>
                         </Link>
                     </NavigationMenuItem> */}
+
+                    <NavigationMenuItem>
+                        <div className="flex items-center space-x-2">
+                            {/* <Switch id="airplane-mode" />
+                            <Label htmlFor="airplane-mode">Dark Mode</Label> */}
+
+                            <ModeToggle />
+                        </div>
+                    </NavigationMenuItem>
                 </NavigationMenuList>
             </NavigationMenu>
         </div>

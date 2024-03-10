@@ -61,11 +61,10 @@ export default function Navbar() {
         <div className="w-full flex items-center justify-between mt-5 px-10">
             <a href="/" className="text-2xl font-black ">
                 DSCP
-            </a> 
+            </a>
 
             <NavigationMenu>
                 <NavigationMenuList>
-
                     <NavigationMenuItem>
                         <NavigationMenuTrigger>Our Services</NavigationMenuTrigger>
                         <NavigationMenuContent>

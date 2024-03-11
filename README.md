@@ -8,7 +8,6 @@ The **Decentralized Secure Collaboration Platform (DSCP)** is an innovative solu
 > Use Case: Collaborative Research and Project Management
 > 
 
-
 ![DSCP ARCHITECTURE DIAGRAM.drawio.png](https://github.com/mohammadshaad/Decentralized-Secure-Collaboration-Platform/blob/main/public/DSCP%20ARCHITECTURE%20DIAGRAM.png?raw=true)
 
 ## **1. Introduction**

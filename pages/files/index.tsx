@@ -16,7 +16,7 @@ export default function Home() {
   const [uploading, setUploading] = useState(false);
   const [data, setData] = useState([]);
   const [deleting, setDeleting] = useState(false);
-  const [pinataJWT, setPinataJWT] = useState(""); 
+  const [pinataJWT, setPinataJWT] = useState("");
 
   const inputFile = useRef(null);
 
@@ -53,11 +53,8 @@ export default function Home() {
       const formData = new FormData();
       formData.set("file", fileToUpload);
       formData.set("pinataJWT", pinataJWT);
-      const res = await fetch("https://api.pinata.cloud/pinning/pinFileToIPFS", {
+      const res = await fetch("/api/files", {
         method: "POST",
-        headers: {
-          Authorization: `Bearer ${pinataJWT}`,
-        },
         body: formData,
       });
       const resData = await res.json();

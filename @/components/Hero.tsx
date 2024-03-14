@@ -36,7 +36,7 @@ function Hero() {
       />
       <div className='text-4xl md:text-7xl text-left md:text-center font-extrabold md:max-w-6xl leading-tight uppercase'>
         <span className='hero-text'>
-          Descentralised
+          Decentralised
         </span>
         {" "}
         Secure Collaboration Platform

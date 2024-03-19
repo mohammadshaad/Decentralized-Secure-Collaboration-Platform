@@ -27,8 +27,6 @@ function Hero() {
   };
 
   return (
-
-
     <div className='container flex flex-col items-start justify-center w-full  max-h-screen h-[500px]'>
       <Spotlight
         className="-top-40 left-0 md:left-60 md:-top-20"

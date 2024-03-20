@@ -20,39 +20,16 @@ import { ModeToggle } from "./ModeToggle"
 
 const components: { title: string; href: string; description: string }[] = [
     {
-        title: "Alert Dialog",
-        href: "/docs/primitives/alert-dialog",
+        title: "File Upload & Sharing",
+        href: "/files",
         description:
-            "A modal dialog that interrupts the user with important content and expects a response.",
+            "A platform for uploading and sharing your content with your team in a secure and decentralised manner.",
     },
     {
-        title: "Hover Card",
-        href: "/docs/primitives/hover-card",
+        title: "Chatting & Messaging",
+        href: "/chat",
         description:
-            "For sighted users to preview content available behind a link.",
-    },
-    {
-        title: "Progress",
-        href: "/docs/primitives/progress",
-        description:
-            "Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.",
-    },
-    {
-        title: "Scroll-area",
-        href: "/docs/primitives/scroll-area",
-        description: "Visually or semantically separates content.",
-    },
-    {
-        title: "Tabs",
-        href: "/docs/primitives/tabs",
-        description:
-            "A set of layered sections of content—known as tab panels—that are displayed one at a time.",
-    },
-    {
-        title: "Tooltip",
-        href: "/docs/primitives/tooltip",
-        description:
-            "A popup that displays information related to an element when the element receives keyboard focus or the mouse hovers over it.",
+            "A platform for chatting and messaging with your team in a secure and decentralised manner.",
     },
 ]
 
@@ -60,7 +37,7 @@ export default function Navbar() {
     return (
         <div className="w-full flex items-center justify-between mt-5 px-10">
             <a href="/" className="text-2xl font-black ">
-                DSCP
+                DECOL
             </a>
 
             <NavigationMenu>

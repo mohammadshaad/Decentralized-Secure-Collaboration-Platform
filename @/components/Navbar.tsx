@@ -1,22 +1,11 @@
-"use client"
-
-import * as React from "react"
-import Link from "next/link"
-import { Label } from "../components/ui/label"
-import { Switch } from "../components/ui/switch"
-import { cn } from "../lib/utils"
-// import { Icons } from "../components/icons"
-import {
-    NavigationMenu,
-    NavigationMenuContent,
-    NavigationMenuItem,
-    NavigationMenuLink,
-    NavigationMenuList,
-    NavigationMenuTrigger,
-    navigationMenuTriggerStyle,
-} from "../components/ui/navigation-menu"
-
-import { ModeToggle } from "./ModeToggle"
+import * as React from "react";
+import Link from "next/link";
+import { Label } from "../components/ui/label";
+import { Switch } from "../components/ui/switch";
+import { cn } from "../lib/utils";
+import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger, navigationMenuTriggerStyle } from "../components/ui/navigation-menu";
+import { ModeToggle } from "./ModeToggle";
+import { Button } from "./ui/button";
 
 const components: { title: string; href: string; description: string }[] = [
     {
@@ -31,9 +20,15 @@ const components: { title: string; href: string; description: string }[] = [
         description:
             "A platform for chatting and messaging with your team in a secure and decentralised manner.",
     },
-]
+];
 
-export default function Navbar() {
+export default function Navbar({ currentUser, connectWallet }: { currentUser: any; connectWallet: () => void }) {
+    // Function to truncate the wallet address
+    const truncateAddress = (address: string) => {
+        if (address.length <= 10) return address;
+        return `${address.slice(0, 5)}...${address.slice(-5)}`;
+    };
+
     return (
         <div className="w-full flex items-center justify-between mt-5 px-10">
             <a href="/" className="text-2xl font-black ">
@@ -58,26 +53,29 @@ export default function Navbar() {
                             </ul>
                         </NavigationMenuContent>
                     </NavigationMenuItem>
-                    {/* <NavigationMenuItem>
-                        <Link href="/docs" legacyBehavior passHref>
-                            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                                Documentation
-                            </NavigationMenuLink>
-                        </Link>
-                    </NavigationMenuItem> */}
 
                     <NavigationMenuItem>
                         <div className="flex items-center space-x-2">
-                            {/* <Switch id="airplane-mode" />
-                            <Label htmlFor="airplane-mode">Dark Mode</Label> */}
-
                             <ModeToggle />
                         </div>
                     </NavigationMenuItem>
+
+                    {/* Display truncated wallet address or connect wallet button */}
+                    {currentUser ? (
+                        <NavigationMenuItem>
+                            <span className="text-gray-600">{truncateAddress(currentUser)}</span>
+                        </NavigationMenuItem>
+                    ) : (
+                        <NavigationMenuItem>
+                            <Button className="text-blue-500" onClick={connectWallet}>
+                                Connect Wallet
+                            </Button>
+                        </NavigationMenuItem>
+                    )}
                 </NavigationMenuList>
             </NavigationMenu>
         </div>
-    )
+    );
 }
 
 const ListItem = React.forwardRef<
@@ -102,6 +100,6 @@ const ListItem = React.forwardRef<
                 </a>
             </NavigationMenuLink>
         </li>
-    )
-})
-ListItem.displayName = "ListItem"
+    );
+});
+ListItem.displayName = "ListItem";

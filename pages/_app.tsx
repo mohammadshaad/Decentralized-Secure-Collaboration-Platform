@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import Footer from "../@/components/Footer";
 import Navbar from "../@/components/Navbar";
 import "../styles/globals.css";
@@ -9,23 +10,45 @@ import { Protocols } from "@waku/sdk";
 const NODE_OPTIONS = { defaultBootstrap: true };
 
 export default function App({ Component, pageProps }: AppProps) {
-  return (
-    <LightNodeProvider options={NODE_OPTIONS} protocols={[Protocols.Store, Protocols.Filter, Protocols.LightPush]}>
-      <ContentPairProvider contentTopic={"/chat/" + 333}>
-        <div className="w-full h-full">
-          <ThemeProvider
-            attribute="class"
-            defaultTheme=""
-            enableSystem
-            disableTransitionOnChange
-          >
-            <Navbar />
-            <Component {...pageProps} />
-            <Footer />
+    const [currentUser, setCurrentUser] = useState<string | null>(null);
 
-          </ThemeProvider>
-        </div>
-      </ContentPairProvider>
-    </LightNodeProvider>
-  )
+    useEffect(() => {
+        if ((window as any).ethereum) {
+            (window as any).ethereum.request({ method: 'eth_requestAccounts' }).then((accounts: string[]) => {
+                setCurrentUser(accounts[0]);
+            }).catch((error: any) => {
+                console.error(error);
+            });
+        }
+    }, []);
+
+    // Function to handle wallet connection
+    const connectWallet = () => {
+        if ((window as any).ethereum) {
+            (window as any).ethereum.request({ method: 'eth_requestAccounts' }).then((accounts: string[]) => {
+                setCurrentUser(accounts[0]);
+            }).catch((error: any) => {
+                console.error(error);
+            });
+        }
+    };
+
+    return (
+        <LightNodeProvider options={NODE_OPTIONS} protocols={[Protocols.Store, Protocols.Filter, Protocols.LightPush]}>
+            <ContentPairProvider contentTopic={"/chat/" + 333}>
+                <div className="w-full h-full">
+                    <ThemeProvider
+                        attribute="class"
+                        defaultTheme=""
+                        enableSystem
+                        disableTransitionOnChange
+                    >
+                        <Navbar currentUser={currentUser} connectWallet={connectWallet} />
+                        <Component {...pageProps} />
+                        <Footer />
+                    </ThemeProvider>
+                </div>
+            </ContentPairProvider>
+        </LightNodeProvider>
+    );
 }

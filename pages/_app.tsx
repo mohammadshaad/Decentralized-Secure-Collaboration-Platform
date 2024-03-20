@@ -3,6 +3,9 @@ import Navbar from "../@/components/Navbar";
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import { ThemeProvider } from "../@/components/theme-provider";
+import { LightNodeProvider } from "@waku/react";
+
+const NODE_OPTIONS = { defaultBootstrap: true };
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -13,10 +16,12 @@ export default function App({ Component, pageProps }: AppProps) {
         enableSystem
         disableTransitionOnChange
       >
+        <LightNodeProvider options={NODE_OPTIONS}>
+          <Navbar />
+          <Component {...pageProps} />
+          <Footer />
+        </LightNodeProvider>
 
-        <Navbar />
-        <Component {...pageProps} />
-        <Footer />
       </ThemeProvider>
     </div>
   )

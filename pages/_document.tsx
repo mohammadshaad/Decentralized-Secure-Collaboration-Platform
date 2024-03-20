@@ -1,5 +1,8 @@
 import { Html, Head, Main, NextScript } from "next/document";
 import { ThemeProvider } from "../@/components/theme-provider";
+import { LightNodeProvider } from "@waku/react";
+
+const NODE_OPTIONS = { defaultBootstrap: true };
 
 export default function Document() {
   return (

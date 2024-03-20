@@ -3,6 +3,9 @@ import Image from "next/image";
 import { Inter } from "next/font/google";
 import Hero from "../@/components/Hero";
 import WhyUs from "../@/components/WhyUs";
+import { LightNodeProvider } from "@waku/react";
+
+const NODE_OPTIONS = { defaultBootstrap: true };
 
 const inter = Inter({ subsets: ["latin"] });
 

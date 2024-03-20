@@ -6,6 +6,20 @@ import { cn } from "../lib/utils";
 import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger, navigationMenuTriggerStyle } from "../components/ui/navigation-menu";
 import { ModeToggle } from "./ModeToggle";
 import { Button } from "./ui/button";
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuGroup,
+    DropdownMenuItem,
+    DropdownMenuLabel,
+    DropdownMenuPortal,
+    DropdownMenuSeparator,
+    DropdownMenuShortcut,
+    DropdownMenuSub,
+    DropdownMenuSubContent,
+    DropdownMenuSubTrigger,
+    DropdownMenuTrigger,
+} from "../components/ui/dropdown-menu"
 
 const components: { title: string; href: string; description: string }[] = [
     {
@@ -22,7 +36,7 @@ const components: { title: string; href: string; description: string }[] = [
     },
 ];
 
-export default function Navbar({ currentUser, connectWallet }: { currentUser: any; connectWallet: () => void }) {
+export default function Navbar({ currentUser, connectWallet, disconnectWallet }: { currentUser: any; connectWallet: () => void; disconnectWallet: () => void }) {
     // Function to truncate the wallet address
     const truncateAddress = (address: string) => {
         if (address.length <= 10) return address;
@@ -54,16 +68,20 @@ export default function Navbar({ currentUser, connectWallet }: { currentUser: an
                         </NavigationMenuContent>
                     </NavigationMenuItem>
 
-                    <NavigationMenuItem>
-                        <div className="flex items-center space-x-2">
-                            <ModeToggle />
-                        </div>
-                    </NavigationMenuItem>
-
                     {/* Display truncated wallet address or connect wallet button */}
                     {currentUser ? (
                         <NavigationMenuItem>
-                            <Button className="">{truncateAddress(currentUser)}</Button>
+                            {/* <Button className="">{truncateAddress(currentUser)} </Button> */}
+                            <DropdownMenu>
+                                <DropdownMenuTrigger asChild>
+                                    <Button variant="outline">{truncateAddress(currentUser)}</Button>
+                                </DropdownMenuTrigger>
+                                <DropdownMenuContent className="w-56">
+                                    <DropdownMenuItem onSelect={disconnectWallet}>
+                                        Sign Out
+                                    </DropdownMenuItem>
+                                </DropdownMenuContent>
+                            </DropdownMenu>
                         </NavigationMenuItem>
                     ) : (
                         <NavigationMenuItem>
@@ -72,6 +90,12 @@ export default function Navbar({ currentUser, connectWallet }: { currentUser: an
                             </Button>
                         </NavigationMenuItem>
                     )}
+
+                    <NavigationMenuItem>
+                        <div className="flex items-center space-x-2">
+                            <ModeToggle />
+                        </div>
+                    </NavigationMenuItem>
                 </NavigationMenuList>
             </NavigationMenu>
         </div>

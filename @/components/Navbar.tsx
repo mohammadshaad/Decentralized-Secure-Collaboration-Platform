@@ -36,7 +36,7 @@ export default function Navbar({ currentUser, connectWallet }: { currentUser: an
             </a>
 
             <NavigationMenu>
-                <NavigationMenuList>
+                <NavigationMenuList className="gap-2">
                     <NavigationMenuItem>
                         <NavigationMenuTrigger>Our Services</NavigationMenuTrigger>
                         <NavigationMenuContent>
@@ -63,7 +63,7 @@ export default function Navbar({ currentUser, connectWallet }: { currentUser: an
                     {/* Display truncated wallet address or connect wallet button */}
                     {currentUser ? (
                         <NavigationMenuItem>
-                            <span className="text-gray-600">{truncateAddress(currentUser)}</span>
+                            <Button className="">{truncateAddress(currentUser)}</Button>
                         </NavigationMenuItem>
                     ) : (
                         <NavigationMenuItem>

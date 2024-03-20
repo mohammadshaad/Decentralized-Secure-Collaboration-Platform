@@ -85,7 +85,7 @@ export default function Navbar({ currentUser, connectWallet, disconnectWallet }:
                         </NavigationMenuItem>
                     ) : (
                         <NavigationMenuItem>
-                            <Button className="text-blue-500" onClick={connectWallet}>
+                            <Button className="" onClick={connectWallet}>
                                 Connect Wallet
                             </Button>
                         </NavigationMenuItem>

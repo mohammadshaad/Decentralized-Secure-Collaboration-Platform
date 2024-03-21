@@ -70,7 +70,7 @@ function Index() {
     }, [filterMessages, storeMessages]);
 
     return (
-        <div className="h-screen flex flex-col relative top-14 justify-between ">
+        <div className="h-full flex flex-col relative top-14 justify-between ">
             <div className="flex-grow overflow-y-auto px-4 py-8 overscrl">
                 {messages.map((message, index) => (
                     <ChatBubble key={index} message={message} isSent={message.from === 'senderID'} />

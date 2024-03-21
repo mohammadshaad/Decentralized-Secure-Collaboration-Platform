@@ -44,60 +44,62 @@ export default function Navbar({ currentUser, connectWallet, disconnectWallet }:
     };
 
     return (
-        <div className="w-full flex items-center justify-between mt-5 px-10">
-            <a href="/" className="text-2xl font-black ">
-                DECOL
-            </a>
+        <div className="flex items-center justify-center "> 
+            <div className="w-full rounded-full flex items-center justify-between mt-5 mx-10 px-10 fixed top-0 py-4 z-50 backdrop-blur-lg">
+                <a href="/" className="text-2xl font-black ">
+                    DECOL
+                </a>
 
-            <NavigationMenu>
-                <NavigationMenuList className="gap-2">
-                    <NavigationMenuItem>
-                        <NavigationMenuTrigger>Our Services</NavigationMenuTrigger>
-                        <NavigationMenuContent>
-                            <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
-                                {components.map((component) => (
-                                    <ListItem
-                                        key={component.title}
-                                        title={component.title}
-                                        href={component.href}
-                                    >
-                                        {component.description}
-                                    </ListItem>
-                                ))}
-                            </ul>
-                        </NavigationMenuContent>
-                    </NavigationMenuItem>
-
-                    {/* Display truncated wallet address or connect wallet button */}
-                    {currentUser ? (
+                <NavigationMenu>
+                    <NavigationMenuList className="gap-2">
                         <NavigationMenuItem>
-                            {/* <Button className="">{truncateAddress(currentUser)} </Button> */}
-                            <DropdownMenu>
-                                <DropdownMenuTrigger asChild>
-                                    <Button variant="outline">{truncateAddress(currentUser)}</Button>
-                                </DropdownMenuTrigger>
-                                <DropdownMenuContent className="w-56">
-                                    <DropdownMenuItem onSelect={disconnectWallet}>
-                                        Sign Out
-                                    </DropdownMenuItem>
-                                </DropdownMenuContent>
-                            </DropdownMenu>
+                            <NavigationMenuTrigger>Our Services</NavigationMenuTrigger>
+                            <NavigationMenuContent>
+                                <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
+                                    {components.map((component) => (
+                                        <ListItem
+                                            key={component.title}
+                                            title={component.title}
+                                            href={component.href}
+                                        >
+                                            {component.description}
+                                        </ListItem>
+                                    ))}
+                                </ul>
+                            </NavigationMenuContent>
                         </NavigationMenuItem>
-                    ) : (
-                        <NavigationMenuItem>
-                            <Button className="" onClick={connectWallet}>
-                                Connect Wallet
-                            </Button>
-                        </NavigationMenuItem>
-                    )}
 
-                    <NavigationMenuItem>
-                        <div className="flex items-center space-x-2">
-                            <ModeToggle />
-                        </div>
-                    </NavigationMenuItem>
-                </NavigationMenuList>
-            </NavigationMenu>
+                        {/* Display truncated wallet address or connect wallet button */}
+                        {currentUser ? (
+                            <NavigationMenuItem>
+                                {/* <Button className="">{truncateAddress(currentUser)} </Button> */}
+                                <DropdownMenu>
+                                    <DropdownMenuTrigger asChild>
+                                        <Button variant="outline">{truncateAddress(currentUser)}</Button>
+                                    </DropdownMenuTrigger>
+                                    <DropdownMenuContent className="w-56">
+                                        <DropdownMenuItem onSelect={disconnectWallet}>
+                                            Sign Out
+                                        </DropdownMenuItem>
+                                    </DropdownMenuContent>
+                                </DropdownMenu>
+                            </NavigationMenuItem>
+                        ) : (
+                            <NavigationMenuItem>
+                                <Button className="" onClick={connectWallet}>
+                                    Connect Wallet
+                                </Button>
+                            </NavigationMenuItem>
+                        )}
+
+                        <NavigationMenuItem>
+                            <div className="flex items-center space-x-2">
+                                <ModeToggle />
+                            </div>
+                        </NavigationMenuItem>
+                    </NavigationMenuList>
+                </NavigationMenu>
+            </div>
         </div>
     );
 }

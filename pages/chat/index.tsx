@@ -13,9 +13,15 @@ function ChatBubble({ message, isSent }) {
     return (
         <div className={`flex flex-col mb-4 ${isSent ? 'items-end' : 'items-start'}`}>
             <div className="flex justify-between">
+                <span className='text-gray-600 text-sm'>
+                    {isSent ? "You" : message.from}
+                </span>
+                <span className="text-gray-600 text-sm">
+                    {message.from}
+                </span>
                 <span className="text-gray-600 text-sm">{new Date(message.timestamp).toUTCString()}</span>
             </div>
-            <div className={`bg-${isSent ? 'blue' : 'gray'}-200 rounded-lg p-3 max-w-[70%]`}>
+            <div className={`bg-${isSent ? 'blue' : 'gray'}-300 rounded-lg p-3 max-w-[70%]`}>
                 <span className={`text-${isSent ? 'white' : 'gray'}-800`}>{message.message}</span>
             </div>
         </div>
@@ -64,20 +70,20 @@ function Index() {
     }, [filterMessages, storeMessages]);
 
     return (
-        <div className="max-h-screen flex flex-col justify-between ">
-            <div className="flex-grow overflow-y-auto px-4 py-8">
+        <div className="h-screen flex flex-col relative top-14 justify-between ">
+            <div className="flex-grow overflow-y-auto px-4 py-8 overscrl">
                 {messages.map((message, index) => (
                     <ChatBubble key={index} message={message} isSent={message.from === 'senderID'} />
                 ))}
             </div>
-            <div className=" p-4">
+            <div className="fixed bottom-0 w-full backdrop-blur-xl p-4">
                 <div className="flex items-center">
                     <Input
                         type="text"
                         id="message-input"
                         value={inputMessage}
                         onChange={(e) => setInputMessage(e.target.value)}
-                        className="flex-grow mr-4 border border-gray-300 rounded-md p-2 focus:outline-none"
+                        className="flex-grow mr-4 border border-gray-300 rounded-md p-2 focus:outline-none "
                         placeholder="Type your message..."
                     />
                     <Button className="px-4 py-2  focus:outline-none" onClick={sendMessage}>Send</Button>

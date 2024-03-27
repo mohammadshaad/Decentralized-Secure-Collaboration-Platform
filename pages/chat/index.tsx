@@ -69,6 +69,10 @@ function Index() {
         }));
     }, [filterMessages, storeMessages]);
 
+    if (isLoading) {
+        return <div className='w-screen h-screen flex items-center justify-center text-4xl'>Loading...</div>;
+    }
+
     return (
         <div className="h-full flex flex-col relative top-14 justify-between ">
             <div className="flex-grow overflow-y-auto px-4 py-8 overscrl">

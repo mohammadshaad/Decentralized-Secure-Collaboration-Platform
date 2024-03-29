@@ -1,7 +1,7 @@
 # Decentralized Secure Collaboration Platform (DSCP)
 
 
-## Project Overview
+## Overview
 
 The **Decentralized Secure Collaboration Platform (DSCP)** is an innovative solution designed to address the challenges of secure collaboration in research and project management scenarios. By leveraging decentralized identity management, secure file sharing, and collaborative features, DSCP ensures privacy, security, and transparency for users engaged in collaborative projects.
 

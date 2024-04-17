@@ -21,6 +21,7 @@ function ChatBubble({ message, isSent }) {
                 </span>
                 <span className="text-gray-600 text-sm">{new Date(message.timestamp).toUTCString()}</span>
             </div>
+            
             <div className={`bg-${isSent ? 'blue' : 'gray'}-300 rounded-lg p-3 max-w-[70%]`}>
                 <span className={`text-${isSent ? 'white' : 'gray'}-800`}>{message.message}</span>
             </div>

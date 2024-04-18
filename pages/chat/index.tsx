@@ -61,7 +61,6 @@ function Index() {
             console.log(errors);
         }
     };
-
     useEffect(() => {
         const allMessages = storeMessages.concat(filterMessages);
         setMessages(allMessages.map((wakuMessage) => {

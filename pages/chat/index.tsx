@@ -9,6 +9,7 @@ import { useFilterMessages, useStoreMessages } from "@waku/react";
 import { Button } from '../../@/components/ui/button';
 import { Input } from '../../@/components/ui/input';
 
+
 function ChatBubble({ message, isSent }) {
     return (
         <div className={`flex flex-col mb-4 ${isSent ? 'items-end' : 'items-start'}`}>
